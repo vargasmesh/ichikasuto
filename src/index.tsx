@@ -6,8 +6,11 @@ import { Word } from "./lib/parser";
 const renderDetailMarkdown = (word: Word) => {
   let markdown = "";
 
-  word.readings?.forEach((reading) => {
-    markdown += `## ${reading.reading}\n`;
+  word.meanings?.forEach((reading) => {
+    markdown += `## ${reading.kana}\n`;
+    reading.translations?.forEach((translation, index) => {
+      markdown += `${index + 1}. ${translation}\n`;
+    });
   });
 
   return markdown;

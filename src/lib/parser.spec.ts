@@ -9,9 +9,26 @@ describe("parseIchimoe", () => {
     const expected = {
       romanji: "ohayō ichi/hito kasuto",
       words: [
-        { romanji: "ohayō", readings: [{ reading: "おはよう" }] },
-        { romanji: "ichi/hito", readings: [{ reading: "1. 一 【いち】" }, { reading: "2. 一 【ひと】" }] },
-        { romanji: "kasuto", readings: [{ reading: "カスト" }] },
+        { romanji: "ohayō", meanings: [{ kana: "おはよう", translations: ["good morning"] }] },
+        {
+          romanji: "ichi/hito",
+          meanings: [
+            {
+              kana: "1. 一 【いち】",
+              translations: [
+                "one; 1",
+                "best",
+                "first; foremost",
+                "beginning; start",
+                "a (single); one (of many)",
+                "ace (playing card)",
+                "bottom string (on a shamisen, etc.)",
+              ],
+            },
+            { kana: "2. 一 【ひと】", translations: ["one", "one"] },
+          ],
+        },
+        { romanji: "kasuto", meanings: [{ kana: "カスト", translations: ["caste"] }] },
       ],
     };
 

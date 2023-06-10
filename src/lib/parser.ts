@@ -1,12 +1,13 @@
 import * as cheerio from "cheerio";
 
-export type Reading = {
-  reading: string;
+export type Meaning = {
+  kana: string;
+  translations: string[];
 };
 
 export type Word = {
   romanji: string;
-  readings?: Reading[];
+  meanings: Meaning[];
 };
 
 export const parseIchimoe = ($: cheerio.CheerioAPI) => {
@@ -18,15 +19,36 @@ export const parseIchimoe = ($: cheerio.CheerioAPI) => {
   tokens.each((_, token) => {
     const child = $(token);
     const romanji = child.find(".gloss-rtext > a > em").text();
-    const readings: Reading[] = [];
+    const meanings: Meaning[] = [];
 
-    child.find("dt").map((_, reading) => {
-      readings.push({
-        reading: $(reading).text(),
+    let tempMeaning: Meaning | undefined = undefined;
+    child
+      .find("dl")
+      .children()
+      .each((_, r) => {
+        if (r.name === "dt") {
+          if (tempMeaning) {
+            meanings.push(tempMeaning);
+          }
+
+          tempMeaning = {
+            kana: $(r).text(),
+            translations: [],
+          };
+        }
+
+        if (r.name === "dd" && tempMeaning) {
+          const translations = $(r)
+            .find(".gloss-desc")
+            .map((_, t) => $(t).text())
+            .get();
+          tempMeaning.translations = translations;
+        }
       });
-    });
 
-    words.push({ romanji, readings });
+    if (tempMeaning) meanings.push(tempMeaning);
+
+    words.push({ romanji, meanings });
   });
 
   return {
