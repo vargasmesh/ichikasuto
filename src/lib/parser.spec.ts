@@ -8,6 +8,11 @@ describe("parseIchimoe", () => {
     const $ = cheerio.load(fs.readFileSync("./src/lib/testdata/test.html").toString());
     const expected = {
       romanji: "ohayō ichi/hito kasuto",
+      words: [
+        { romanji: "ohayō", readings: [{ reading: "おはよう" }] },
+        { romanji: "ichi/hito", readings: [{ reading: "1. 一 【いち】" }, { reading: "2. 一 【ひと】" }] },
+        { romanji: "kasuto", readings: [{ reading: "カスト" }] },
+      ],
     };
 
     const result = parseIchimoe($);
