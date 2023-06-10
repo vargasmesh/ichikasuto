@@ -1,5 +1,5 @@
 import { Detail } from "@raycast/api";
-import { useIchimoe } from "./lib/ichimoe";
+import { useIchimoe } from "./lib/useIchimoe";
 
 export default function Command() {
   const input = "おはよう一カスト";

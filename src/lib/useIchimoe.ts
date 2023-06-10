@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import { useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
+import { parseIchimoe } from "./parser";
 
 export const useIchimoe = (kanji: string) => {
   const [parsedIchimoe, setParsedIchimoe] = useState<ReturnType<typeof parseIchimoe>>();
@@ -14,12 +15,4 @@ export const useIchimoe = (kanji: string) => {
   }, [isLoading]);
 
   return { isLoading, parsedIchimoe };
-};
-
-export const parseIchimoe = ($: cheerio.CheerioAPI) => {
-  const romanji = $(".ds-text[data-pick=0]").text();
-
-  return {
-    romanji,
-  };
 };
