@@ -9,26 +9,35 @@ describe("parseIchimoe", () => {
     const expected = {
       romanji: "ohayō ichi/hito kasuto",
       words: [
-        { romanji: "ohayō", meanings: [{ kana: "おはよう", translations: ["good morning"] }] },
+        {
+          romanji: "ohayō",
+          meanings: [{ kana: "おはよう", translations: [{ value: "good morning", type: "[int]" }] }],
+        },
         {
           romanji: "ichi/hito",
           meanings: [
             {
               kana: "1. 一 【いち】",
               translations: [
-                "one; 1",
-                "best",
-                "first; foremost",
-                "beginning; start",
-                "a (single); one (of many)",
-                "ace (playing card)",
-                "bottom string (on a shamisen, etc.)",
+                { type: "[num,pref]", value: "one; 1" },
+                { type: "[adj-no,suf]", value: "best" },
+                { type: "[adj-no]", value: "first; foremost" },
+                { type: "[n]", value: "beginning; start" },
+                { type: "[n-pref]", value: "a (single); one (of many)" },
+                { type: "[n]", value: "ace (playing card)" },
+                { type: "[n]", value: "bottom string (on a shamisen, etc.)" },
               ],
             },
-            { kana: "2. 一 【ひと】", translations: ["one", "one"] },
+            {
+              kana: "2. 一 【ひと】",
+              translations: [
+                { value: "one", type: "[pref]" },
+                { value: "one", type: "[num]" },
+              ],
+            },
           ],
         },
-        { romanji: "kasuto", meanings: [{ kana: "カスト", translations: ["caste"] }] },
+        { romanji: "kasuto", meanings: [{ kana: "カスト", translations: [{ type: "[n]", value: "caste" }] }] },
       ],
     };
 

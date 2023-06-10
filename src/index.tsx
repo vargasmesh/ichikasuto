@@ -9,7 +9,7 @@ const renderDetailMarkdown = (word: Word) => {
   word.meanings?.forEach((reading) => {
     markdown += `## ${reading.kana}\n`;
     reading.translations?.forEach((translation, index) => {
-      markdown += `${index + 1}. ${translation}\n`;
+      markdown += `${index + 1}. _${translation.type}_ ${translation.value}\n`;
     });
   });
 

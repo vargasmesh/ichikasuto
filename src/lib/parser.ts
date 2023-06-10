@@ -1,8 +1,13 @@
 import * as cheerio from "cheerio";
 
+type Translation = {
+  type: string;
+  value: string;
+};
+
 export type Meaning = {
   kana: string;
-  translations: string[];
+  translations: Translation[];
 };
 
 export type Word = {
@@ -38,11 +43,16 @@ export const parseIchimoe = ($: cheerio.CheerioAPI) => {
         }
 
         if (r.name === "dd" && tempMeaning) {
-          const translations = $(r)
-            .find(".gloss-desc")
-            .map((_, t) => $(t).text())
+          $(r)
+            .find("ol > li")
+            .each((_, t) => {
+              const row = $(t);
+              tempMeaning?.translations.push({
+                type: row.find(".pos-desc").text(),
+                value: row.find(".gloss-desc").text(),
+              });
+            })
             .get();
-          tempMeaning.translations = translations;
         }
       });
 
