@@ -1,10 +1,10 @@
 import * as cheerio from "cheerio";
 
-type Reading = {
+export type Reading = {
   reading: string;
 };
 
-type Word = {
+export type Word = {
   romanji: string;
   readings?: Reading[];
 };
@@ -34,3 +34,5 @@ export const parseIchimoe = ($: cheerio.CheerioAPI) => {
     words,
   };
 };
+
+export type ParsedIchimoe = ReturnType<typeof parseIchimoe>;

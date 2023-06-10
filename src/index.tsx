@@ -1,16 +1,30 @@
-import { Detail } from "@raycast/api";
 import { useIchimoe } from "./lib/useIchimoe";
+import { useState } from "react";
+import { List } from "@raycast/api";
+import { Word } from "./lib/parser";
+
+const renderDetailMarkdown = (word: Word) => {
+  let markdown = "";
+
+  word.readings?.forEach((reading) => {
+    markdown += `## ${reading.reading}\n`;
+  });
+
+  return markdown;
+};
 
 export default function Command() {
-  const input = "おはよう一カスト";
-  const { parsedIchimoe, isLoading } = useIchimoe(input);
+  const [searchText, setSearchText] = useState("");
+  const { parsedIchimoe, isLoading } = useIchimoe(searchText);
 
-  const markdown = !isLoading
-    ? `
-  # ${input} 
-  ${parsedIchimoe?.romanji ? "## " + parsedIchimoe?.romanji : ""}
-  `
-    : "";
+  return (
+    <List isLoading={isLoading} onSearchTextChange={setSearchText} isShowingDetail={true}>
+      {parsedIchimoe &&
+        parsedIchimoe.words.map((word) => {
+          const detail = <List.Item.Detail markdown={renderDetailMarkdown(word)} />;
 
-  return <Detail markdown={markdown} isLoading={isLoading} navigationTitle={input} />;
+          return <List.Item title={word.romanji} key={word.romanji} detail={detail} />;
+        })}
+    </List>
+  );
 }
