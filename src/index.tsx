@@ -1,19 +1,14 @@
 import { Detail } from "@raycast/api";
-import { parseIchimoe, queryIchimoe } from "./lib/ichimoe";
-import { usePromise } from "@raycast/utils";
+import { useIchimoe } from "./lib/ichimoe";
 
 export default function Command() {
   const input = "おはよう一カスト";
-
-  const { data, isLoading } = usePromise(async () => {
-    const ichimoe = await queryIchimoe(input);
-    return parseIchimoe(ichimoe);
-  });
+  const { parsedIchimoe, isLoading } = useIchimoe(input);
 
   const markdown = !isLoading
     ? `
   # ${input} 
-  ${data?.romanji ? "## " + data?.romanji : ""}
+  ${parsedIchimoe?.romanji ? "## " + parsedIchimoe?.romanji : ""}
   `
     : "";
 
