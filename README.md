@@ -1,7 +1,5 @@
 # Ichikasuto
 
-Study japanese using JMDict and Kanjidic
-
 [Ichi.moe](https://ichi.moe/) is a great tool for learning Japanese. But we are in 2023, we don't like to open websites. So why don't we bring it to our comfortable `CMD+Space` ?
 
 ## Installation
