@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "ichikasuto",
-  "title": "ichikasuto",
+  "title": "Ichikasuto",
   "description": "Study japanese using JMDict and Kanjidic",
   "icon": "command-icon.png",
   "author": "vargasmesh",
@@ -14,7 +14,7 @@
     {
       "name": "index",
       "title": "Translate with Ichikasuto",
-      "description": "",
+      "description": "Translate your japanese phrases using ichi.moe",
       "mode": "view"
     }
   ],
